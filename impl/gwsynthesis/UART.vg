@@ -1,0 +1,1253 @@
+//
+//Written by GowinSynthesis
+//Tool Version "V1.9.10.02"
+//Wed Oct 30 15:07:45 2024
+
+//Source file index table:
+//file0 "\C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/BaudClkGenerator.vhd"
+//file1 "\C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/Serialiser.vhd"
+//file2 "\C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/ShiftRegister.vhd"
+//file3 "\C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/Synchroniser.vhd"
+//file4 "\C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/TopLevelModule.vhd"
+//file5 "\C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_rx.vhd"
+//file6 "\C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_tx.vhd"
+`timescale 100 ps/100 ps
+module Serialiser (
+  clk_d,
+  Rst_d,
+  SMVariable,
+  BaudClk_Z,
+  RxData,
+  rs232_tx_pin_d,
+  ShiftReg_8_16
+)
+;
+input clk_d;
+input Rst_d;
+input SMVariable;
+input BaudClk_Z;
+input [7:0] RxData;
+output rs232_tx_pin_d;
+output ShiftReg_8_16;
+wire n7_4;
+wire n8_3;
+wire n9_3;
+wire n10_3;
+wire n11_3;
+wire n12_3;
+wire n13_3;
+wire n6_9;
+wire n14_9;
+wire [8:1] ShiftReg;
+wire VCC;
+wire GND;
+  LUT3 n7_s0 (
+    .F(n7_4),
+    .I0(RxData[6]),
+    .I1(ShiftReg[8]),
+    .I2(SMVariable) 
+);
+defparam n7_s0.INIT=8'hAC;
+  LUT3 n8_s0 (
+    .F(n8_3),
+    .I0(ShiftReg[7]),
+    .I1(RxData[5]),
+    .I2(SMVariable) 
+);
+defparam n8_s0.INIT=8'hCA;
+  LUT3 n9_s0 (
+    .F(n9_3),
+    .I0(ShiftReg[6]),
+    .I1(RxData[4]),
+    .I2(SMVariable) 
+);
+defparam n9_s0.INIT=8'hCA;
+  LUT3 n10_s0 (
+    .F(n10_3),
+    .I0(ShiftReg[5]),
+    .I1(RxData[3]),
+    .I2(SMVariable) 
+);
+defparam n10_s0.INIT=8'hCA;
+  LUT3 n11_s0 (
+    .F(n11_3),
+    .I0(ShiftReg[4]),
+    .I1(RxData[2]),
+    .I2(SMVariable) 
+);
+defparam n11_s0.INIT=8'hCA;
+  LUT3 n12_s0 (
+    .F(n12_3),
+    .I0(ShiftReg[3]),
+    .I1(RxData[1]),
+    .I2(SMVariable) 
+);
+defparam n12_s0.INIT=8'hCA;
+  LUT3 n13_s0 (
+    .F(n13_3),
+    .I0(ShiftReg[2]),
+    .I1(RxData[0]),
+    .I2(SMVariable) 
+);
+defparam n13_s0.INIT=8'hCA;
+  LUT4 n6_s4 (
+    .F(n6_9),
+    .I0(SMVariable),
+    .I1(ShiftReg[8]),
+    .I2(RxData[7]),
+    .I3(BaudClk_Z) 
+);
+defparam n6_s4.INIT=16'hF5E4;
+  LUT2 ShiftReg_8_s5 (
+    .F(ShiftReg_8_16),
+    .I0(SMVariable),
+    .I1(BaudClk_Z) 
+);
+defparam ShiftReg_8_s5.INIT=4'hE;
+  LUT4 n14_s4 (
+    .F(n14_9),
+    .I0(SMVariable),
+    .I1(BaudClk_Z),
+    .I2(rs232_tx_pin_d),
+    .I3(ShiftReg[1]) 
+);
+defparam n14_s4.INIT=16'h5410;
+  DFFPE ShiftReg_7_s1 (
+    .Q(ShiftReg[7]),
+    .D(n7_4),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_7_s1.INIT=1'b1;
+  DFFPE ShiftReg_6_s1 (
+    .Q(ShiftReg[6]),
+    .D(n8_3),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_6_s1.INIT=1'b1;
+  DFFPE ShiftReg_5_s1 (
+    .Q(ShiftReg[5]),
+    .D(n9_3),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_5_s1.INIT=1'b1;
+  DFFPE ShiftReg_4_s1 (
+    .Q(ShiftReg[4]),
+    .D(n10_3),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_4_s1.INIT=1'b1;
+  DFFPE ShiftReg_3_s1 (
+    .Q(ShiftReg[3]),
+    .D(n11_3),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_3_s1.INIT=1'b1;
+  DFFPE ShiftReg_2_s1 (
+    .Q(ShiftReg[2]),
+    .D(n12_3),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_2_s1.INIT=1'b1;
+  DFFPE ShiftReg_1_s1 (
+    .Q(ShiftReg[1]),
+    .D(n13_3),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_1_s1.INIT=1'b1;
+  DFFP ShiftReg_8_s4 (
+    .Q(ShiftReg[8]),
+    .D(n6_9),
+    .CLK(clk_d),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_8_s4.INIT=1'b1;
+  DFFP ShiftReg_0_s3 (
+    .Q(rs232_tx_pin_d),
+    .D(n14_9),
+    .CLK(clk_d),
+    .PRESET(Rst_d) 
+);
+defparam ShiftReg_0_s3.INIT=1'b1;
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* Serialiser */
+module BaudClkGenerator (
+  clk_d,
+  Rst_d,
+  ShiftReg_8_16,
+  SMVariable,
+  n38_14,
+  BaudClk_Z,
+  Ready_6,
+  TxReady,
+  clockCount
+)
+;
+input clk_d;
+input Rst_d;
+input ShiftReg_8_16;
+input SMVariable;
+input n38_14;
+output BaudClk_Z;
+output Ready_6;
+output TxReady;
+output [3:3] clockCount;
+wire n57_6;
+wire n30_5;
+wire n38_6;
+wire n37_6;
+wire n36_6;
+wire n35_6;
+wire n34_6;
+wire n33_6;
+wire n32_6;
+wire n31_6;
+wire n30_6;
+wire n30_7;
+wire n38_7;
+wire n35_7;
+wire n34_7;
+wire n32_7;
+wire n56_8;
+wire n58_8;
+wire n59_9;
+wire [7:0] BitPeriodCounter;
+wire [2:0] clockCount_0;
+wire VCC;
+wire GND;
+  LUT4 n57_s2 (
+    .F(n57_6),
+    .I0(clockCount_0[0]),
+    .I1(clockCount_0[1]),
+    .I2(SMVariable),
+    .I3(clockCount_0[2]) 
+);
+defparam n57_s2.INIT=16'h0E01;
+  LUT4 n30_s1 (
+    .F(n30_5),
+    .I0(clockCount[3]),
+    .I1(Ready_6),
+    .I2(n30_6),
+    .I3(n30_7) 
+);
+defparam n30_s1.INIT=16'hB000;
+  LUT2 n38_s2 (
+    .F(n38_6),
+    .I0(BitPeriodCounter[0]),
+    .I1(n38_7) 
+);
+defparam n38_s2.INIT=4'h4;
+  LUT3 n37_s2 (
+    .F(n37_6),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[1]),
+    .I2(n38_7) 
+);
+defparam n37_s2.INIT=8'h60;
+  LUT4 n36_s2 (
+    .F(n36_6),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[1]),
+    .I2(BitPeriodCounter[2]),
+    .I3(n38_7) 
+);
+defparam n36_s2.INIT=16'h7800;
+  LUT2 n35_s2 (
+    .F(n35_6),
+    .I0(n38_7),
+    .I1(n35_7) 
+);
+defparam n35_s2.INIT=4'h2;
+  LUT3 n34_s2 (
+    .F(n34_6),
+    .I0(n34_7),
+    .I1(BitPeriodCounter[4]),
+    .I2(n38_7) 
+);
+defparam n34_s2.INIT=8'h60;
+  LUT4 n33_s2 (
+    .F(n33_6),
+    .I0(n34_7),
+    .I1(BitPeriodCounter[4]),
+    .I2(BitPeriodCounter[5]),
+    .I3(n38_7) 
+);
+defparam n33_s2.INIT=16'h7800;
+  LUT3 n32_s2 (
+    .F(n32_6),
+    .I0(n32_7),
+    .I1(BitPeriodCounter[6]),
+    .I2(n38_7) 
+);
+defparam n32_s2.INIT=8'h60;
+  LUT4 n31_s2 (
+    .F(n31_6),
+    .I0(n32_7),
+    .I1(BitPeriodCounter[6]),
+    .I2(BitPeriodCounter[7]),
+    .I3(n38_7) 
+);
+defparam n31_s2.INIT=16'h7800;
+  LUT3 Ready_s4 (
+    .F(Ready_6),
+    .I0(clockCount_0[0]),
+    .I1(clockCount_0[1]),
+    .I2(clockCount_0[2]) 
+);
+defparam Ready_s4.INIT=8'h01;
+  LUT4 n30_s2 (
+    .F(n30_6),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[2]),
+    .I2(BitPeriodCounter[1]),
+    .I3(BitPeriodCounter[3]) 
+);
+defparam n30_s2.INIT=16'h1000;
+  LUT4 n30_s3 (
+    .F(n30_7),
+    .I0(BitPeriodCounter[4]),
+    .I1(BitPeriodCounter[5]),
+    .I2(BitPeriodCounter[6]),
+    .I3(BitPeriodCounter[7]) 
+);
+defparam n30_s3.INIT=16'h4000;
+  LUT4 n38_s3 (
+    .F(n38_7),
+    .I0(n30_6),
+    .I1(n30_7),
+    .I2(clockCount[3]),
+    .I3(Ready_6) 
+);
+defparam n38_s3.INIT=16'h7077;
+  LUT4 n35_s3 (
+    .F(n35_7),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[1]),
+    .I2(BitPeriodCounter[2]),
+    .I3(BitPeriodCounter[3]) 
+);
+defparam n35_s3.INIT=16'h807F;
+  LUT4 n34_s3 (
+    .F(n34_7),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[1]),
+    .I2(BitPeriodCounter[2]),
+    .I3(BitPeriodCounter[3]) 
+);
+defparam n34_s3.INIT=16'h8000;
+  LUT3 n32_s3 (
+    .F(n32_7),
+    .I0(n34_7),
+    .I1(BitPeriodCounter[4]),
+    .I2(BitPeriodCounter[5]) 
+);
+defparam n32_s3.INIT=8'h80;
+  LUT4 n56_s3 (
+    .F(n56_8),
+    .I0(SMVariable),
+    .I1(BaudClk_Z),
+    .I2(clockCount[3]),
+    .I3(Ready_6) 
+);
+defparam n56_s3.INIT=16'hBEFA;
+  LUT4 n58_s3 (
+    .F(n58_8),
+    .I0(SMVariable),
+    .I1(BaudClk_Z),
+    .I2(clockCount_0[1]),
+    .I3(clockCount_0[0]) 
+);
+defparam n58_s3.INIT=16'hFABE;
+  LUT3 n59_s4 (
+    .F(n59_9),
+    .I0(SMVariable),
+    .I1(BaudClk_Z),
+    .I2(clockCount_0[0]) 
+);
+defparam n59_s4.INIT=8'h14;
+  DFFC BitPeriodCounter_7_s0 (
+    .Q(BitPeriodCounter[7]),
+    .D(n31_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_6_s0 (
+    .Q(BitPeriodCounter[6]),
+    .D(n32_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_5_s0 (
+    .Q(BitPeriodCounter[5]),
+    .D(n33_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_4_s0 (
+    .Q(BitPeriodCounter[4]),
+    .D(n34_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_3_s0 (
+    .Q(BitPeriodCounter[3]),
+    .D(n35_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_2_s0 (
+    .Q(BitPeriodCounter[2]),
+    .D(n36_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_1_s0 (
+    .Q(BitPeriodCounter[1]),
+    .D(n37_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_0_s0 (
+    .Q(BitPeriodCounter[0]),
+    .D(n38_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BaudClk_s0 (
+    .Q(BaudClk_Z),
+    .D(n30_5),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFCE clockCount_2_s1 (
+    .Q(clockCount_0[2]),
+    .D(n57_6),
+    .CLK(clk_d),
+    .CE(ShiftReg_8_16),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_2_s1.INIT=1'b0;
+  DFFC clockCount_3_s3 (
+    .Q(clockCount[3]),
+    .D(n56_8),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_3_s3.INIT=1'b0;
+  DFFC clockCount_1_s3 (
+    .Q(clockCount_0[1]),
+    .D(n58_8),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_1_s3.INIT=1'b0;
+  DFFC clockCount_0_s3 (
+    .Q(clockCount_0[0]),
+    .D(n59_9),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_0_s3.INIT=1'b0;
+  DFFP Ready_s5 (
+    .Q(TxReady),
+    .D(n38_14),
+    .CLK(clk_d),
+    .PRESET(Rst_d) 
+);
+defparam Ready_s5.INIT=1'b1;
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* BaudClkGenerator */
+module UART_tx (
+  clk_d,
+  Rst_d,
+  SMVariable,
+  n38_14,
+  RxData,
+  Ready_6,
+  TxReady,
+  rs232_tx_pin_d,
+  clockCount
+)
+;
+input clk_d;
+input Rst_d;
+input SMVariable;
+input n38_14;
+input [7:0] RxData;
+output Ready_6;
+output TxReady;
+output rs232_tx_pin_d;
+output [3:3] clockCount;
+wire ShiftReg_8_16;
+wire BaudClk_Z;
+wire VCC;
+wire GND;
+  Serialiser UART_Serialiser_INST (
+    .clk_d(clk_d),
+    .Rst_d(Rst_d),
+    .SMVariable(SMVariable),
+    .BaudClk_Z(BaudClk_Z),
+    .RxData(RxData[7:0]),
+    .rs232_tx_pin_d(rs232_tx_pin_d),
+    .ShiftReg_8_16(ShiftReg_8_16)
+);
+  BaudClkGenerator UART_TIMING_INST (
+    .clk_d(clk_d),
+    .Rst_d(Rst_d),
+    .ShiftReg_8_16(ShiftReg_8_16),
+    .SMVariable(SMVariable),
+    .n38_14(n38_14),
+    .BaudClk_Z(BaudClk_Z),
+    .Ready_6(Ready_6),
+    .TxReady(TxReady),
+    .clockCount(clockCount[3])
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* UART_tx */
+module ShiftRegister (
+  clk_d,
+  BaudClk_Z,
+  Rst_d,
+  RS232_Rx_Synched,
+  RxData
+)
+;
+input clk_d;
+input BaudClk_Z;
+input Rst_d;
+input RS232_Rx_Synched;
+output [7:0] RxData;
+wire VCC;
+wire GND;
+  DFFCE ShiftReg_6_s0 (
+    .Q(RxData[6]),
+    .D(RxData[7]),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  DFFCE ShiftReg_5_s0 (
+    .Q(RxData[5]),
+    .D(RxData[6]),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  DFFCE ShiftReg_4_s0 (
+    .Q(RxData[4]),
+    .D(RxData[5]),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  DFFCE ShiftReg_3_s0 (
+    .Q(RxData[3]),
+    .D(RxData[4]),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  DFFCE ShiftReg_2_s0 (
+    .Q(RxData[2]),
+    .D(RxData[3]),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  DFFCE ShiftReg_1_s0 (
+    .Q(RxData[1]),
+    .D(RxData[2]),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  DFFCE ShiftReg_0_s0 (
+    .Q(RxData[0]),
+    .D(RxData[1]),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  DFFCE ShiftReg_7_s0 (
+    .Q(RxData[7]),
+    .D(RS232_Rx_Synched),
+    .CLK(clk_d),
+    .CE(BaudClk_Z),
+    .CLEAR(Rst_d) 
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* ShiftRegister */
+module Synchroniser (
+  rs232_rx_pin_d,
+  clk_d,
+  Rst_d,
+  RS232_Rx_Synched
+)
+;
+input rs232_rx_pin_d;
+input clk_d;
+input Rst_d;
+output RS232_Rx_Synched;
+wire [0:0] synch;
+wire VCC;
+wire GND;
+  DFFP synch_0_s0 (
+    .Q(synch[0]),
+    .D(rs232_rx_pin_d),
+    .CLK(clk_d),
+    .PRESET(Rst_d) 
+);
+  DFFP synch_1_s0 (
+    .Q(RS232_Rx_Synched),
+    .D(synch[0]),
+    .CLK(clk_d),
+    .PRESET(Rst_d) 
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* Synchroniser */
+module BaudClkGenerator_0 (
+  clk_d,
+  Rst_d,
+  Start,
+  BaudClk_Z,
+  Ready_Z
+)
+;
+input clk_d;
+input Rst_d;
+input Start;
+output BaudClk_Z;
+output Ready_Z;
+wire n57_6;
+wire n37_6;
+wire n31_6;
+wire n36_6;
+wire n34_6;
+wire Ready_6;
+wire n30_6;
+wire n35_7;
+wire n31_7;
+wire n56_6;
+wire n34_7;
+wire n33_7;
+wire n32_7;
+wire n30_7;
+wire n30_8;
+wire n32_9;
+wire n33_9;
+wire n38_8;
+wire n35_9;
+wire n30_10;
+wire n56_9;
+wire clockCount_3_14;
+wire n58_9;
+wire n59_8;
+wire n70_9;
+wire [7:0] BitPeriodCounter;
+wire [3:0] clockCount;
+wire VCC;
+wire GND;
+  LUT4 n57_s2 (
+    .F(n57_6),
+    .I0(clockCount[0]),
+    .I1(clockCount[1]),
+    .I2(Start),
+    .I3(clockCount[2]) 
+);
+defparam n57_s2.INIT=16'h0E01;
+  LUT4 n37_s2 (
+    .F(n37_6),
+    .I0(n30_6),
+    .I1(Ready_6),
+    .I2(BitPeriodCounter[0]),
+    .I3(BitPeriodCounter[1]) 
+);
+defparam n37_s2.INIT=16'h0110;
+  LUT4 n31_s2 (
+    .F(n31_6),
+    .I0(n30_6),
+    .I1(Ready_6),
+    .I2(n31_7),
+    .I3(BitPeriodCounter[7]) 
+);
+defparam n31_s2.INIT=16'h0110;
+  LUT4 n36_s2 (
+    .F(n36_6),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[1]),
+    .I2(Ready_6),
+    .I3(BitPeriodCounter[2]) 
+);
+defparam n36_s2.INIT=16'hF7F8;
+  LUT3 n34_s2 (
+    .F(n34_6),
+    .I0(Ready_6),
+    .I1(n34_7),
+    .I2(BitPeriodCounter[4]) 
+);
+defparam n34_s2.INIT=8'hBE;
+  LUT4 Ready_s4 (
+    .F(Ready_6),
+    .I0(clockCount[0]),
+    .I1(clockCount[1]),
+    .I2(clockCount[2]),
+    .I3(clockCount[3]) 
+);
+defparam Ready_s4.INIT=16'h0001;
+  LUT2 n30_s2 (
+    .F(n30_6),
+    .I0(n30_7),
+    .I1(n30_8) 
+);
+defparam n30_s2.INIT=4'h8;
+  LUT4 n35_s3 (
+    .F(n35_7),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[1]),
+    .I2(BitPeriodCounter[2]),
+    .I3(BitPeriodCounter[3]) 
+);
+defparam n35_s3.INIT=16'h807F;
+  LUT4 n31_s3 (
+    .F(n31_7),
+    .I0(n34_7),
+    .I1(BitPeriodCounter[4]),
+    .I2(BitPeriodCounter[5]),
+    .I3(BitPeriodCounter[6]) 
+);
+defparam n31_s3.INIT=16'h8000;
+  LUT4 n56_s2 (
+    .F(n56_6),
+    .I0(clockCount[0]),
+    .I1(clockCount[1]),
+    .I2(clockCount[2]),
+    .I3(clockCount[3]) 
+);
+defparam n56_s2.INIT=16'h01FE;
+  LUT4 n34_s3 (
+    .F(n34_7),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[1]),
+    .I2(BitPeriodCounter[2]),
+    .I3(BitPeriodCounter[3]) 
+);
+defparam n34_s3.INIT=16'h8000;
+  LUT3 n33_s3 (
+    .F(n33_7),
+    .I0(n34_7),
+    .I1(BitPeriodCounter[4]),
+    .I2(BitPeriodCounter[5]) 
+);
+defparam n33_s3.INIT=8'h87;
+  LUT4 n32_s3 (
+    .F(n32_7),
+    .I0(n34_7),
+    .I1(BitPeriodCounter[4]),
+    .I2(BitPeriodCounter[5]),
+    .I3(BitPeriodCounter[6]) 
+);
+defparam n32_s3.INIT=16'h807F;
+  LUT4 n30_s3 (
+    .F(n30_7),
+    .I0(BitPeriodCounter[4]),
+    .I1(BitPeriodCounter[5]),
+    .I2(BitPeriodCounter[6]),
+    .I3(BitPeriodCounter[7]) 
+);
+defparam n30_s3.INIT=16'h4000;
+  LUT4 n30_s4 (
+    .F(n30_8),
+    .I0(BitPeriodCounter[0]),
+    .I1(BitPeriodCounter[2]),
+    .I2(BitPeriodCounter[1]),
+    .I3(BitPeriodCounter[3]) 
+);
+defparam n30_s4.INIT=16'h1000;
+  LUT4 n32_s4 (
+    .F(n32_9),
+    .I0(n30_7),
+    .I1(n30_8),
+    .I2(n32_7),
+    .I3(Ready_6) 
+);
+defparam n32_s4.INIT=16'hFF07;
+  LUT4 n33_s4 (
+    .F(n33_9),
+    .I0(n30_7),
+    .I1(n30_8),
+    .I2(n33_7),
+    .I3(Ready_6) 
+);
+defparam n33_s4.INIT=16'hFF07;
+  LUT4 n38_s3 (
+    .F(n38_8),
+    .I0(n30_7),
+    .I1(n30_8),
+    .I2(BitPeriodCounter[0]),
+    .I3(Ready_6) 
+);
+defparam n38_s3.INIT=16'hFF07;
+  LUT4 n35_s4 (
+    .F(n35_9),
+    .I0(n30_7),
+    .I1(n30_8),
+    .I2(Ready_6),
+    .I3(n35_7) 
+);
+defparam n35_s4.INIT=16'h0007;
+  LUT3 n30_s5 (
+    .F(n30_10),
+    .I0(Ready_6),
+    .I1(n30_7),
+    .I2(n30_8) 
+);
+defparam n30_s5.INIT=8'h40;
+  LUT4 n56_s4 (
+    .F(n56_9),
+    .I0(Start),
+    .I1(clockCount[3]),
+    .I2(n56_6),
+    .I3(BaudClk_Z) 
+);
+defparam n56_s4.INIT=16'hAFEE;
+  LUT2 clockCount_3_s5 (
+    .F(clockCount_3_14),
+    .I0(Start),
+    .I1(BaudClk_Z) 
+);
+defparam clockCount_3_s5.INIT=4'hE;
+  LUT4 n58_s4 (
+    .F(n58_9),
+    .I0(Start),
+    .I1(BaudClk_Z),
+    .I2(clockCount[1]),
+    .I3(clockCount[0]) 
+);
+defparam n58_s4.INIT=16'h5014;
+  LUT3 n59_s3 (
+    .F(n59_8),
+    .I0(Start),
+    .I1(BaudClk_Z),
+    .I2(clockCount[0]) 
+);
+defparam n59_s3.INIT=8'hBE;
+  LUT3 n70_s4 (
+    .F(n70_9),
+    .I0(Start),
+    .I1(Ready_Z),
+    .I2(Ready_6) 
+);
+defparam n70_s4.INIT=8'h54;
+  DFFC BitPeriodCounter_7_s0 (
+    .Q(BitPeriodCounter[7]),
+    .D(n31_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_6_s0 (
+    .Q(BitPeriodCounter[6]),
+    .D(n32_9),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_5_s0 (
+    .Q(BitPeriodCounter[5]),
+    .D(n33_9),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_4_s0 (
+    .Q(BitPeriodCounter[4]),
+    .D(n34_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_3_s0 (
+    .Q(BitPeriodCounter[3]),
+    .D(n35_9),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_2_s0 (
+    .Q(BitPeriodCounter[2]),
+    .D(n36_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_1_s0 (
+    .Q(BitPeriodCounter[1]),
+    .D(n37_6),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BitPeriodCounter_0_s0 (
+    .Q(BitPeriodCounter[0]),
+    .D(n38_8),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFC BaudClk_s0 (
+    .Q(BaudClk_Z),
+    .D(n30_10),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFCE clockCount_2_s1 (
+    .Q(clockCount[2]),
+    .D(n57_6),
+    .CLK(clk_d),
+    .CE(clockCount_3_14),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_2_s1.INIT=1'b0;
+  DFFC clockCount_3_s4 (
+    .Q(clockCount[3]),
+    .D(n56_9),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_3_s4.INIT=1'b0;
+  DFFC clockCount_1_s3 (
+    .Q(clockCount[1]),
+    .D(n58_9),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_1_s3.INIT=1'b0;
+  DFFC clockCount_0_s3 (
+    .Q(clockCount[0]),
+    .D(n59_8),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam clockCount_0_s3.INIT=1'b0;
+  DFFP Ready_s5 (
+    .Q(Ready_Z),
+    .D(n70_9),
+    .CLK(clk_d),
+    .PRESET(Rst_d) 
+);
+defparam Ready_s5.INIT=1'b1;
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* BaudClkGenerator_0 */
+module UART_rx (
+  clk_d,
+  Rst_d,
+  SMVariable,
+  rs232_rx_pin_d,
+  RxIRQ_Z,
+  RxData
+)
+;
+input clk_d;
+input Rst_d;
+input SMVariable;
+input rs232_rx_pin_d;
+output RxIRQ_Z;
+output [7:0] RxData;
+wire n28_3;
+wire RxIRQ_5;
+wire n39_15;
+wire n35_9;
+wire n36_10;
+wire fallingEdge;
+wire RS232_Rx_Synched_Delay;
+wire Start;
+wire RS232_Rx_Synched;
+wire BaudClk_Z;
+wire Ready_Z;
+wire [1:0] SMVariable_0;
+wire VCC;
+wire GND;
+  LUT2 n28_s0 (
+    .F(n28_3),
+    .I0(RS232_Rx_Synched),
+    .I1(RS232_Rx_Synched_Delay) 
+);
+defparam n28_s0.INIT=4'h4;
+  LUT2 RxIRQ_s3 (
+    .F(RxIRQ_5),
+    .I0(SMVariable),
+    .I1(SMVariable_0[1]) 
+);
+defparam RxIRQ_s3.INIT=4'hE;
+  LUT4 n39_s9 (
+    .F(n39_15),
+    .I0(Start),
+    .I1(SMVariable_0[0]),
+    .I2(fallingEdge),
+    .I3(SMVariable_0[1]) 
+);
+defparam n39_s9.INIT=16'h2230;
+  LUT3 n35_s4 (
+    .F(n35_9),
+    .I0(SMVariable_0[0]),
+    .I1(SMVariable_0[1]),
+    .I2(Ready_Z) 
+);
+defparam n35_s4.INIT=8'h20;
+  LUT2 n36_s5 (
+    .F(n36_10),
+    .I0(SMVariable_0[1]),
+    .I1(Ready_Z) 
+);
+defparam n36_s5.INIT=4'h1;
+  DFFC fallingEdge_s0 (
+    .Q(fallingEdge),
+    .D(n28_3),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+  DFFP RS232_Rx_Synched_Delay_s0 (
+    .Q(RS232_Rx_Synched_Delay),
+    .D(RS232_Rx_Synched),
+    .CLK(clk_d),
+    .PRESET(Rst_d) 
+);
+  DFFCE RxIRQ_s1 (
+    .Q(RxIRQ_Z),
+    .D(SMVariable_0[1]),
+    .CLK(clk_d),
+    .CE(RxIRQ_5),
+    .CLEAR(Rst_d) 
+);
+defparam RxIRQ_s1.INIT=1'b0;
+  DFFC Start_s4 (
+    .Q(Start),
+    .D(n39_15),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam Start_s4.INIT=1'b0;
+  DFFC SMVariable_1_s4 (
+    .Q(SMVariable_0[1]),
+    .D(n35_9),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam SMVariable_1_s4.INIT=1'b0;
+  DFFC SMVariable_0_s3 (
+    .Q(SMVariable_0[0]),
+    .D(n36_10),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam SMVariable_0_s3.INIT=1'b0;
+  ShiftRegister ShiftRegister_INST (
+    .clk_d(clk_d),
+    .BaudClk_Z(BaudClk_Z),
+    .Rst_d(Rst_d),
+    .RS232_Rx_Synched(RS232_Rx_Synched),
+    .RxData(RxData[7:0])
+);
+  Synchroniser Synchroniser_INST (
+    .rs232_rx_pin_d(rs232_rx_pin_d),
+    .clk_d(clk_d),
+    .Rst_d(Rst_d),
+    .RS232_Rx_Synched(RS232_Rx_Synched)
+);
+  BaudClkGenerator_0 BaudClkGenerator_RX_INST (
+    .clk_d(clk_d),
+    .Rst_d(Rst_d),
+    .Start(Start),
+    .BaudClk_Z(BaudClk_Z),
+    .Ready_Z(Ready_Z)
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* UART_rx */
+module TopLevelModule (
+  clk,
+  Rst,
+  rs232_rx_pin,
+  rs232_tx_pin,
+  leds
+)
+;
+input clk;
+input Rst;
+input rs232_rx_pin;
+output rs232_tx_pin;
+output [0:5] leds;
+wire clk_d;
+wire Rst_d;
+wire rs232_rx_pin_d;
+wire n38_16;
+wire n38_14;
+wire SMVariable;
+wire leds_d_0_4;
+wire leds_d_1_4;
+wire leds_d_2_4;
+wire leds_d_3_4;
+wire leds_d_4_4;
+wire leds_d_5_4;
+wire Ready_6;
+wire TxReady;
+wire rs232_tx_pin_d;
+wire RxIRQ_Z;
+wire [3:3] clockCount;
+wire [7:0] RxData;
+wire VCC;
+wire GND;
+  IBUF clk_ibuf (
+    .O(clk_d),
+    .I(clk) 
+);
+  IBUF Rst_ibuf (
+    .O(Rst_d),
+    .I(Rst) 
+);
+  IBUF rs232_rx_pin_ibuf (
+    .O(rs232_rx_pin_d),
+    .I(rs232_rx_pin) 
+);
+  OBUF rs232_tx_pin_obuf (
+    .O(rs232_tx_pin),
+    .I(rs232_tx_pin_d) 
+);
+  OBUF leds_0_obuf (
+    .O(leds[0]),
+    .I(leds_d_0_4) 
+);
+  OBUF leds_1_obuf (
+    .O(leds[1]),
+    .I(leds_d_1_4) 
+);
+  OBUF leds_2_obuf (
+    .O(leds[2]),
+    .I(leds_d_2_4) 
+);
+  OBUF leds_3_obuf (
+    .O(leds[3]),
+    .I(leds_d_3_4) 
+);
+  OBUF leds_4_obuf (
+    .O(leds[4]),
+    .I(leds_d_4_4) 
+);
+  OBUF leds_5_obuf (
+    .O(leds[5]),
+    .I(leds_d_5_4) 
+);
+  LUT3 n38_s5 (
+    .F(n38_16),
+    .I0(SMVariable),
+    .I1(TxReady),
+    .I2(RxIRQ_Z) 
+);
+defparam n38_s5.INIT=8'h40;
+  LUT4 n38_s7 (
+    .F(n38_14),
+    .I0(SMVariable),
+    .I1(TxReady),
+    .I2(clockCount[3]),
+    .I3(Ready_6) 
+);
+defparam n38_s7.INIT=16'h4544;
+  DFFC SMVariable_s4 (
+    .Q(SMVariable),
+    .D(n38_16),
+    .CLK(clk_d),
+    .CLEAR(Rst_d) 
+);
+defparam SMVariable_s4.INIT=1'b0;
+  INV leds_d_0_s0 (
+    .O(leds_d_0_4),
+    .I(RxData[5]) 
+);
+  INV leds_d_1_s0 (
+    .O(leds_d_1_4),
+    .I(RxData[4]) 
+);
+  INV leds_d_2_s0 (
+    .O(leds_d_2_4),
+    .I(RxData[3]) 
+);
+  INV leds_d_3_s0 (
+    .O(leds_d_3_4),
+    .I(RxData[2]) 
+);
+  INV leds_d_4_s0 (
+    .O(leds_d_4_4),
+    .I(RxData[1]) 
+);
+  INV leds_d_5_s0 (
+    .O(leds_d_5_4),
+    .I(RxData[0]) 
+);
+  UART_tx UUT_UART_tx (
+    .clk_d(clk_d),
+    .Rst_d(Rst_d),
+    .SMVariable(SMVariable),
+    .n38_14(n38_14),
+    .RxData(RxData[7:0]),
+    .Ready_6(Ready_6),
+    .TxReady(TxReady),
+    .rs232_tx_pin_d(rs232_tx_pin_d),
+    .clockCount(clockCount[3])
+);
+  UART_rx UUT_UART_rx (
+    .clk_d(clk_d),
+    .Rst_d(Rst_d),
+    .SMVariable(SMVariable),
+    .rs232_rx_pin_d(rs232_rx_pin_d),
+    .RxIRQ_Z(RxIRQ_Z),
+    .RxData(RxData[7:0])
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+  GSR GSR (
+    .GSRI(VCC) 
+);
+endmodule /* TopLevelModule */

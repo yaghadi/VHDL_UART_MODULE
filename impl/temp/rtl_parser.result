@@ -1,0 +1,72 @@
+[
+ {
+  "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/TopLevelModule.vhd",
+  "InstLine" : 6,
+  "InstName" : "TopLevelModule",
+  "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/TopLevelModule.vhd",
+  "ModuleLine" : 6,
+  "ModuleName" : "TopLevelModule",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/TopLevelModule.vhd",
+    "InstLine" : 69,
+    "InstName" : "UUT_UART_tx",
+    "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_tx.vhd",
+    "ModuleLine" : 5,
+    "ModuleName" : "UART_tx",
+    "SubInsts" : [
+     {
+      "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_tx.vhd",
+      "InstLine" : 65,
+      "InstName" : "UART_Serialiser_INST",
+      "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/Serialiser.vhd",
+      "ModuleLine" : 5,
+      "ModuleName" : "Serialiser"
+     },
+     {
+      "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_tx.vhd",
+      "InstLine" : 79,
+      "InstName" : "UART_TIMING_INST",
+      "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/BaudClkGenerator.vhd",
+      "ModuleLine" : 5,
+      "ModuleName" : "BaudClkGenerator"
+     }
+    ]
+   },
+   {
+    "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/TopLevelModule.vhd",
+    "InstLine" : 85,
+    "InstName" : "UUT_UART_rx",
+    "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_rx.vhd",
+    "ModuleLine" : 6,
+    "ModuleName" : "UART_rx",
+    "SubInsts" : [
+     {
+      "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_rx.vhd",
+      "InstLine" : 86,
+      "InstName" : "ShiftRegister_INST",
+      "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/ShiftRegister.vhd",
+      "ModuleLine" : 5,
+      "ModuleName" : "ShiftRegister"
+     },
+     {
+      "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_rx.vhd",
+      "InstLine" : 101,
+      "InstName" : "Synchroniser_INST",
+      "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/Synchroniser.vhd",
+      "ModuleLine" : 6,
+      "ModuleName" : "Synchroniser"
+     },
+     {
+      "InstFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/UART_rx.vhd",
+      "InstLine" : 112,
+      "InstName" : "BaudClkGenerator_RX_INST",
+      "ModuleFile" : "C:/Gowin/Gowin_V1.9.10.02_x64/IDE/bin/Documents/UART/src/BaudClkGenerator.vhd",
+      "ModuleLine" : 5,
+      "ModuleName" : "BaudClkGenerator"
+     }
+    ]
+   }
+  ]
+ }
+]
